@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
     let createUser = await User.create(req.body);
     res.send({ token: `${createUser.id}:${createUser.email}:${Date.now()}` });
   } catch (error) {
-    res.status(500).send("Internal Server error");
+    res.status(500).send({ message: error.message });
   }
 };
 
@@ -31,6 +31,6 @@ exports.login = async (req, res) => {
       token: `${user.id}:${user.email}`,
     });
   } catch (error) {
-    res.status(500).send("Internal Server Error");
+    res.status(500).send({ message: error.message });
   }
 };
